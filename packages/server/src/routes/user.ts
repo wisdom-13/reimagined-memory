@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { v4 as uuid } from 'uuid'
+
 import { Op } from "sequelize";
 import User from "../schemas/user";
 
@@ -59,7 +60,7 @@ router.post('/login', async (req, res) => {
 /* 로그아웃 */
 router.post('/logout', async (req, res) => {
   try {
-    delete req.session.user;
+    delete req.session.userId;
 
     req.session.save(() => {
       res.redirect('/');

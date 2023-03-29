@@ -22,13 +22,14 @@ router.get('/:roomId', async (req, res) => {
 /* 채팅 전송 */
 router.post('/:roomId', async (req, res) => {
   try {
-    const chant = await Chat.create({
+    const chat = await Chat.create({
       senderId: req.session.userId,
       content: req.body.content,
       coomId: req.params.roomId
     });
 
-    /* TODO:: socket */
+    const io = req.app.get('io');
+    io.of('/chat').to(req.params.roomId).emit('chat', chat);
 
     res.json({ message: 'ok' });
   } catch (e) { }
