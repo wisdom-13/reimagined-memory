@@ -1,17 +1,18 @@
-import axiosInstance from ".";
+import axiosInstance from "../apis";
+
 
 export interface MakeChatRoomRequest {
   opponentId: string;
 }
 
 export function fetchChatRoomList() {
-  return axiosInstance.get('/rooms');
+  return axiosInstance.get('/room');
 }
 
 export function fetchChatRoomDetail(roomId: string) {
-  return axiosInstance.get(`/rooms/${roomId}`);
+  return axiosInstance.get(`/room/${roomId}`);
 }
 
 export function makeChatRoom(body: MakeChatRoomRequest) {
-  return axiosInstance.post('/rooms', body);
+  return axiosInstance.post('/room', body);
 }

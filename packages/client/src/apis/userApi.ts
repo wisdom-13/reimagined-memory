@@ -1,4 +1,4 @@
-import axiosInstance from ".";
+import axiosInstance from "../apis";
 
 interface User {
   username: string;

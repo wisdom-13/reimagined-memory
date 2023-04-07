@@ -55,6 +55,8 @@ const Friends: React.FC = () => {
   const handleChatRoomCreate = (opponentId: string) => {
     const chatRoom = chatRoomListData?.data.find(chatRoom => chatRoom.opponentId === opponentId);
 
+    console.log(chatRoomListData)
+
     if (chatRoom) {
       navigate(`/rooms/${chatRoom.id}`);
     } else {
@@ -62,6 +64,7 @@ const Friends: React.FC = () => {
         opponentId
       }, {
         onSuccess: (data) => {
+          console.log('success')
           navigate(`/rooms/${data.data.id}`)
         }
       })
