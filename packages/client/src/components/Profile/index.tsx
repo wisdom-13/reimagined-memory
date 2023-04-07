@@ -42,7 +42,7 @@ const Profile: React.FC<Props> = ({ username, thumbnailImage }) => {
   const theme = useTheme();
 
   return (
-    <Base color={theme.color.gray[100]}>
+    <Base color={theme.colors.gray[100]}>
       <AvatarWrapper>
         <Avatar src={thumbnailImage || '/placeholder.png'} />
       </AvatarWrapper>

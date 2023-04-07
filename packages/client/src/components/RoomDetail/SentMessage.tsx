@@ -31,7 +31,7 @@ const SentMessage: React.FC<Props> = ({ content, timestamp }) => {
 
   return (
     <Base>
-      <SpeechBubble backgroundColor={theme.color.primary}>{content}</SpeechBubble>
+      <SpeechBubble backgroundColor={theme.colors.primary}>{content}</SpeechBubble>
       <SentAt>{timestamp}</SentAt>
     </Base>
   )

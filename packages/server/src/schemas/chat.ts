@@ -6,7 +6,7 @@ import User from "./user";
 const Chat = sequelize.define('chat', {
   id: {
     type: DataTypes.INTEGER,
-
+    primaryKey: true,
   },
   content: DataTypes.STRING,
   senderId: {

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { css, Global } from "@emotion/react";
+import { io } from "socket.io-client";
+
 import MessageList from "../components/RoomDetail/MessageList";
 import InputChat from "../components/RoomDetail/InputChat";
 import TopNavigation from "../components/RoomDetail/TopNavigation";
@@ -33,6 +35,7 @@ const globalStyle = css`
 `
 
 const RoomDetail: React.FC = () => {
+  const scrollBottomRef = useRef<HTMLLIElement>(null);
   const { roomId } = useParams<string>();
 
   const { data: profileData } = useQuery<AxiosResponse<IProfile>, AxiosError>(
@@ -50,7 +53,21 @@ const RoomDetail: React.FC = () => {
     () => fetchChatMessageList(roomId as string)
   );
 
+  const [messages, setMessages] = useState<Array<IChat>>(chatListData?.data || []);
+
+  useEffect(() => {
+    const socket = io('http://localhost:8000', { path: '/socket.io' });
+    socket.emit('join', roomId);
+    socket.on('chat', (newMessage: IChat) => {
+      setMessages((prev) => [...prev, newMessage]);
+    })
+  }, [])
+
   const mutation = useMutation('sendChatMessage', (content: string) => sendChatMessage(roomId as string, content));
+
+  useEffect(() => {
+    scrollBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages])
 
   const handleSend = (content: string) => {
     if (content.length) {
@@ -68,7 +85,7 @@ const RoomDetail: React.FC = () => {
       <Container>
         <MessageList>
           {
-            chatListData?.data.map(message =>
+            messages.map(message =>
               message.senderId === profileData?.data.userId ? (
                 <SentMessage
                   senderId={message.senderId}
@@ -84,6 +101,7 @@ const RoomDetail: React.FC = () => {
                 />
               ))
           }
+          <li ref={scrollBottomRef} />
         </MessageList>
         <InputChat onClick={handleSend} />
       </Container>

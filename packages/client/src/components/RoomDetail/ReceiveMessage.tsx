@@ -55,7 +55,7 @@ const ReceiveMessage: React.FC<Props> = ({ receiver, receiverThumbnailImage, con
       <Content>
         <Username>{receiver}</Username>
         <Info>
-          <SpeechBubble backgroundColor={theme.color.white}>{content}</SpeechBubble>
+          <SpeechBubble backgroundColor={theme.colors.white}>{content}</SpeechBubble>
           <ReceivedAt>{timestamp}</ReceivedAt>
         </Info>
       </Content>

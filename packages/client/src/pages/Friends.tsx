@@ -62,7 +62,7 @@ const Friends: React.FC = () => {
         opponentId
       }, {
         onSuccess: (data) => {
-          navigate(`/room/${data.data.id}`)
+          navigate(`/rooms/${data.data.id}`)
         }
       })
     }

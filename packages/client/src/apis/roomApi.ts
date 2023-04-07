@@ -5,13 +5,13 @@ export interface MakeChatRoomRequest {
 }
 
 export function fetchChatRoomList() {
-  return axiosInstance.get('/room');
+  return axiosInstance.get('/rooms');
 }
 
 export function fetchChatRoomDetail(roomId: string) {
-  return axiosInstance.get(`/room/${roomId}`);
+  return axiosInstance.get(`/rooms/${roomId}`);
 }
 
 export function makeChatRoom(body: MakeChatRoomRequest) {
-  return axiosInstance.post('/room', body);
+  return axiosInstance.post('/rooms', body);
 }
